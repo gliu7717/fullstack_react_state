@@ -10,6 +10,8 @@ const Counter = () => {
     const newCount = count + 1;
     // Update state, trigger re-render
     setCount(newCount);
+    //setCount(count + 1);
+    //setCount(count + 1);
     // Change color based on count value
     if (newCount % 2 === 0) {
       setColor("blue");
@@ -19,10 +21,20 @@ const Counter = () => {
     // Log the new value of count
     console.log("Count:", newCount);
   };
+
+  // using  the functonal update guarantees you always work with the latest state,
+  // avoiding those stale closure pitfalls
+  const incrementWithFunction = () => {
+    setCount((prev) => prev + 1);
+    setCount((prev) => prev + 1);
+    console.log(count);
+  };
+
   return (
     <div>
       <h2 style={{ color }}>Counter: {count}</h2>
       <button onClick={increment}>Increment</button>
+      <button onClick={incrementWithFunction}>Increment using function</button>
     </div>
   );
 };
